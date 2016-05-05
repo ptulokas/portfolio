@@ -9,8 +9,19 @@ module.exports = function(grunt) {
         cwd: 'src/',
         src: '**/*.html',
         dest: 'dist/',
-        flatten: true,
+        flatten: false,
         filter: 'isFile',
+      }
+    },
+    ts: {
+      default : {
+        tsconfig: true,
+        src: "src/**/*.ts",
+        outDir: "dist",
+        options: {
+          module: "system",
+          verbose: true
+        }
       }
     },
     uglify: {
@@ -58,8 +69,8 @@ module.exports = function(grunt) {
           }
       },    
       scripts: {
-        files: ['src/**/*.js'],
-        tasks: ['uglify']
+        files: ['src/**/*.ts'],
+        tasks: ['ts']
       },
       styles: {
         files: ['src/**/*.less'],
@@ -79,9 +90,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-package-modules');
+  grunt.loadNpmTasks('grunt-ts');
 
   // Default task(s).
-  grunt.registerTask('default', ['copy', 'uglify', 'less:build', 'packageModules', 'connect:server', 'watch']);
+  // js grunt
+  // grunt.registerTask('default', ['copy', 'uglify', 'less:build', 'packageModules', 'connect:server', 'watch']);
+  // ts grunt
+  grunt.registerTask('default', ['copy', 'ts', 'less:build', 'packageModules', 'connect:server', 'watch']);
+
 
 
 };

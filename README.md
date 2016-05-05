@@ -1,1 +1,3 @@
-Small pet project to build my Portfolio with known open source tools
+Small modular pet project with known open source tools.
+- Online image editor - WIP
+- Scalable grid component - TBD

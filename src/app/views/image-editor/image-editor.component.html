@@ -1,0 +1,8 @@
+<div class="image_editor" (click)="onClick()">
+    <menu-bar [naviItems]="naviItems" (selectItem)="selectItem($event)"></menu-bar>
+    <div class="editor-container">
+        <tool-bar [tools]="tools" (selectTool)="selectTool($event)"></tool-bar>
+        <image class="editor-image"></image>
+    </div>
+</div>
+
