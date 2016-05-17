@@ -1,0 +1,11 @@
+<div class="image-scale" (click)="onClick($event)">
+    <h1>Scale Image</h1>
+    <p>Keep aspect ratio:</p>
+    <input type="radio" [(ngModel)]="keepRatio"/>
+    <p>Width:</p>
+    <input type="text" length="20" (keyup)="onWidthChange($event)" [(ngModel)]="image.width"/>
+    <p>Height:</p>
+    <input type="text" length="20" (keyup)="onHeightChange($event)" [(ngModel)]="image.height"/>
+    <button (click)="scaleImage()">Scale</button>
+    <button (click)="cancel()">Cancel</button>
+</div>

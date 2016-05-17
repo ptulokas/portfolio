@@ -1,0 +1,7 @@
+<div *ngIf="showModal" class="container" (click)="onClick()">
+    <div class="modal">
+        <file-save [fileData]="currentData" (dismissModal)="dismissModal($event)" *ngIf="currentModal == 'save'"></file-save>
+        <image-scale [image]="currentData" (dismissModal)="dismissModal($event)" (scale)="onScale($event)" *ngIf="currentModal == 'scale'"></image-scale>
+    </div>
+</div>
+

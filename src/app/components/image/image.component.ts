@@ -1,4 +1,6 @@
-import {Component, Input, EventEmitter} from 'angular2/core';
+import _                                   from 'lodash';
+import {Component, Input, EventEmitter}    from '@angular/core';
+
 
 @Component({
     selector: 'image',
@@ -6,8 +8,7 @@ import {Component, Input, EventEmitter} from 'angular2/core';
 })
 
 export class ImageComponent {
-    @Input() imageData: {};
-
+    imageData: {};
     showImage: false;
     canvas: false;
 
@@ -15,22 +16,41 @@ export class ImageComponent {
         console.log('image: ', this);
     }
 
-    ngOnInit() {
-        this.canvas = document.getElementById('image-canvas');
-    }
-
     setImage(data) {
-        console.log('set image');
-        var img = new Image();
+        console.log('image component - set image');
+        let img = new Image();
+        let canvas =  document.getElementById('image-canvas');
+        this.imageData = _.clone(data);
         img.onload = () => {
-            console.log('new image: ', img);
-            this.canvas.width = img.width;
-            this.canvas.height = img.height;
-            this.canvas.getContext("2d").drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+            console.log('new image loaded');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
             console.log('image drawn: ', this.canvas.height);
             this.showImage = true;
         }
-        img.src = data;
+        img.src = this.imageData;
+        this.canvas = canvas;
+    }
+
+    scaleImage(scale) {
+        console.log('scale image to: ', scale);
+        console.log('canvas: ', this.canvas);
+        let canvas = document.getElementById('image-canvas');
+        let img = new Image();
+        img.onload = () => {
+            console.log('scale image on load');
+            canvas.width = scale.width;
+            canvas.height = scale.height;
+            this.canvas.getContext("2d").drawImage(img, 0, 0, scale.width, scale.height);
+        }
+        console.log(this.imageData);
+        img.src = this.imageData;
+    }
+
+    getImageScale() {
+        console.log('image for scale: ', this.image);
+        return { width: this.canvas.width, height: this.canvas.height };
     }
 
     getImageData() {

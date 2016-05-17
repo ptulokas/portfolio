@@ -2,3 +2,5 @@ node_modules/
 dist/
 src/.baseDir.ts
 typings/
+.tscache/
+src/app/.baseDir.ts

@@ -1,8 +1,8 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component}                      from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
-import {ImageEditorComponent} from './views/image-editor/image-editor.component';
-import {GridComponent} from './views/grid/grid.component';
+import {ImageEditorComponent}           from './views/image-editor/image-editor.component';
+import {GridComponent}                  from './views/grid/grid.component';
 
 @Component({
 	directives: [ROUTER_DIRECTIVES],
@@ -15,4 +15,4 @@ import {GridComponent} from './views/grid/grid.component';
 	{ path: '/grid', name: 'GridComponent', component: GridComponent }
 ])
 
-export class AppComponent { }
+export class AppComponent {}

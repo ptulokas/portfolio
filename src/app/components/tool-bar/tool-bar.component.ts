@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'tool-bar',
@@ -9,8 +9,19 @@ export class ToolBarComponent {
     @Input() tools: [];
     @Output() selectTool = new EventEmitter();
 
-    selectItem(tool){
+    show: boolean = true;
+
+    selectItem(tool) {
         console.log('tool selected: ', tool);
         this.selectTool.next(tool);
+    }
+
+    hideTools() {
+        this.show = false;
+    }
+
+    showTools() {
+        this.show = true;
+        console.log('show tools: ', this.tools);
     }
 }

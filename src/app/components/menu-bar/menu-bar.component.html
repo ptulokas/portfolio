@@ -1,7 +1,7 @@
-<nav class="navi">
-	<div class="item" *ngFor="#item of naviItems" (click)="openNavi($event, item)" stopPropagation>{{ item.name }}</div>
+<nav class="navi" (mouseleave)="dismissMenu()">
+	<div class="item" *ngFor="let item of naviItems" (click)="openNavi($event, item)" (mouseenter)="openNavi($event, item)" stopPropagation>{{ item.name }}</div>
 
-    <div id="dropDownMenu" style="left: {{menuLeft}}; top: {{menuTop}};" *ngIf="showMenu" class="menu {{ menuClass }}">
-        <div *ngFor="#item of menuItems" (click)="selectMenuItem(item)" stop-propagation>{{ item.name }}</div>
+    <div id="dropDownMenu" [style.left]="menuLeft" [style.top]="menuTop" *ngIf="showMenu" class="menu">
+        <div *ngFor="let item of menuItems" (click)="selectMenuItem(item)" stop-propagation>{{ item.name }}</div>
     </div>
 </nav>

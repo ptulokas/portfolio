@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    secret: grunt.file.readJSON('../secret.json'),
     pkg: grunt.file.readJSON('package.json'),
     copy: {
       build: {
@@ -9,7 +10,7 @@ module.exports = function(grunt) {
         cwd: 'src/',
         src: '**/*.html',
         dest: 'dist/',
-        flatten: false,
+        flatten: false, 
         filter: 'isFile',
       }
     },
@@ -19,6 +20,7 @@ module.exports = function(grunt) {
         src: "src/**/*.ts",
         outDir: "dist",
         options: {
+          sourceMap: false,
           module: "system",
           verbose: true
         }
@@ -69,8 +71,8 @@ module.exports = function(grunt) {
           }
       },    
       scripts: {
-        files: ['src/**/*.ts'],
-        tasks: ['ts']
+        files: ['src/**/*.ts', 'src/**/*.js'],
+        tasks: ['ts', 'copy']
       },
       styles: {
         files: ['src/**/*.less'],
@@ -81,6 +83,25 @@ module.exports = function(grunt) {
         tasks: ['copy']
       }
 
+    },
+    sftp: {
+      server: {
+        files: {
+          "./": "dist/**"
+        },
+        options: {
+          path: '<%= secret.path %>',
+          host: '<%= secret.host %>',
+          username: '<%= secret.username %>',
+          password: '<%= secret.password %>',
+          srcBasePath: "dist/",
+          mode: 'upload',
+          createDirectories: true,
+          directoryPermissions: parseInt(755, 8),
+          showProgress: true,
+          chunkSize: 8192
+        }
+      }
     }
   });
 
@@ -90,13 +111,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-package-modules');
+  grunt.loadNpmTasks('grunt-ssh');
   grunt.loadNpmTasks('grunt-ts');
 
   // Default task(s).
   // js grunt
   // grunt.registerTask('default', ['copy', 'uglify', 'less:build', 'packageModules', 'connect:server', 'watch']);
   // ts grunt
-  grunt.registerTask('default', ['copy', 'ts', 'less:build', 'packageModules', 'connect:server', 'watch']);
+  grunt.registerTask('default', ['copy', 'less:build', 'ts', 'packageModules', 'connect:server', 'watch']);
 
 
 

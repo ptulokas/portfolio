@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'menu-bar',
@@ -8,7 +8,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
 export class MenuBarComponent {
     @Input() naviItems: [];
 
-	@Output() selectItem = new EventEmitter<item>();
+	@Output() selectItem = new EventEmitter<any>();
 
     constructor() {
         console.log('menu-bar items: ', this);
@@ -19,11 +19,14 @@ export class MenuBarComponent {
         let rect = event.currentTarget.getBoundingClientRect();
         console.log('rect: ', rect);
         let index = this.naviItems.indexOf(item);
-        this.showMenu = index != this.currentIndex || !this.showMenu;
+        //this.showMenu = index != this.currentIndex || !this.showMenu;
+        this.showMenu = true;
         this.currentIndex = index;
+        console.log('this.currentItem: ', this.currentItem);
         this.menuItems = item.items;
         this.menuLeft = rect.left + 'px';
         this.menuTop = rect.bottom + 'px';
+        console.log('rect left: ', rect.left);
         event.preventDefault();
         event.stopPropagation();
     }

@@ -1,0 +1,6 @@
+<div class="file-save" (click)="onClick($event)">
+    <h1>Save to file</h1>
+    <input type="text" length="20" [(ngModel)]="fileData.name"/>
+    <button (click)="saveImage()">Save</button>
+    <button (click)="cancel()">Cancel</button>
+</div>
